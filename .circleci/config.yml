@@ -38,6 +38,7 @@ jobs:
           command: |
             echo "$DOCKER_HUB_ACCESS_TOKEN" | docker login -u "$DOCKER_HUB_USERNAME" --password-stdin
             docker push $IMAGE_NAME:latest
+
 workflows:
   version: 2
   build-main:
@@ -47,6 +48,8 @@ workflows:
             branches:
               only: main
       - publish-latest:
+          context:
+            - CircleCI
           requires:
             - build
           filters:
