@@ -4,7 +4,7 @@ RUN mkdir /app
 
 WORKDIR /app
 
-COPY logging-service /app
+COPY . /app
 
 RUN mvn -f /app verify clean
 
