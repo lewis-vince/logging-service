@@ -2,6 +2,8 @@ FROM maven:3.6.3-jdk-8-slim AS BUILD_JAR
 
 RUN mkdir /app
 
+WORKDIR /app
+
 COPY logging-service /app
 
 RUN mvn -f /app verify clean
@@ -13,6 +15,8 @@ RUN mvn -f /app package
 FROM openjdk:11-jre
 
 RUN mkdir /app
+
+WORKDIR /app
 
 COPY --from=BUILD_JAR /app/target/logging-service-0.0.1-SNAPSHOT.jar /app/logging-service.jar
 
